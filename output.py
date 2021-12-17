@@ -7,7 +7,8 @@ def write_output(output_answer: dict, response: list):
     path = output_answer['output_path']
     with open(path, 'w') as out_file:
         if out_format == 'csv':
-            writer = csv.writer(csvfile=out_file)
-            writer.writerows(response)
+            writer = csv.writer(out_file, delimiter='"', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            for row in response:
+                writer.writerow(row.values())
         else:
             json.dump(response, out_file)
