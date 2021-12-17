@@ -14,4 +14,5 @@ class Query:
         for item in response:
             item['timestamp'] = int(item['timestamp'])
             item['part'] = int(item['part'])
+            del item['msisdn']
         return response
