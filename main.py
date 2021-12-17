@@ -13,7 +13,7 @@ from query.query_by_sk_msisdn import QueryByMsisdn
 from query.query_by_sk_timestamp import QueryBySkTimestamp
 from questions import query_question, query_parameter__pk_question, query_parameter__sk_question, \
     query_parameter__msisdn_question, next_step_question, output_question, queue_question
-from queue import send_to_output
+from sqs_queue import send_to_output
 
 config_reader = ConfigReader("{}/.aws/credentials".format(str(Path.home())))
 

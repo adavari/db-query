@@ -3,7 +3,7 @@ import json
 import boto3
 
 from credentials.credential_reader import Credentials
-from formatter.dynamodb import dict_to_dynamodb
+from dynamodb_formatter import dict_to_dynamodb
 
 
 def send_to_output(credentials: Credentials, queue_name: str, rows: list):
