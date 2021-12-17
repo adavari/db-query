@@ -12,7 +12,10 @@ class Query:
     @staticmethod
     def normalize(response: list) -> list:
         for item in response:
-            item['timestamp'] = int(item['timestamp'])
-            item['part'] = int(item['part'])
-            del item['msisdn']
+            if 'timestamp' in item:
+                item['timestamp'] = int(item['timestamp'])
+            if 'part' in item:
+                item['part'] = int(item['part'])
+            if 'msisdn' in item:
+                del item['msisdn']
         return response
