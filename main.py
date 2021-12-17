@@ -2,13 +2,15 @@ from __future__ import print_function, unicode_literals
 
 from PyInquirer import prompt
 from examples import custom_style_2
+from pathlib import Path
+
 
 from credentials.credential_reader import ConfigReader
 from query.query import Query
 from query.query_by_pk import QueryByPk
 from query.query_by_sk_timestamp import QueryBySkTimestamp
 
-config_reader = ConfigReader("~/.aws/credentials")
+config_reader = ConfigReader("{}/.aws/credentials".format(str(Path.home())))
 
 profile_question = [
     {
