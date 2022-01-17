@@ -33,17 +33,15 @@ class QueryBySkTimestamp(Query):
 
         response = self.table.query(
             IndexName='message_per_customer',
-            KeyConditionExpression=Key('SK').eq(self.sk).__and__(t_k)
+            KeyConditionExpression=Key('SK').eq(self.sk).__and__(t_k),
         )
 
-        # data = response.get('Items')
-        # while 'LastEvaluatedKey' in response:
-        #     response = self.table.query(
-        #         IndexName='message_per_customer',
-        #         KeyConditionExpression=Key('SK').eq(self.sk).__and__(t_k),
-        #         LastEvaluatedKey=response['LastEvaluatedKey']
-        #     )
-        #     data.extend(response['Items'])
+        data = response.get('Items')
+        while 'LastEvaluatedKey' in response:
+            response = self.table.scan(
+                LastEvaluatedKey=response['LastEvaluatedKey']
+            )
+            data.extend(response['Items'])
 
-        return self.normalize(response['Items'])
+        return self.normalize(data)
 
