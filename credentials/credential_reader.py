@@ -3,9 +3,10 @@ import configparser
 
 class Credentials:
 
-    def __init__(self, access_key_id: str, secret_key: str):
+    def __init__(self, access_key_id: str, secret_key: str, token: str):
         self.access_key_id = access_key_id
         self.secret_key = secret_key
+        self.token = token
 
 
 class ConfigReader:
@@ -21,4 +22,6 @@ class ConfigReader:
     def get_credentials(self, profile: str) -> Credentials:
         key_id = self.parser[profile]['aws_access_key_id']
         secret_key = self.parser[profile]['aws_secret_access_key']
-        return Credentials(key_id, secret_key)
+        token = self.parser[profile]['aws_secret_token']
+
+        return Credentials(key_id, secret_key, token)

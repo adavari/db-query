@@ -11,7 +11,7 @@ class QueryByPk(Query):
         super(QueryByPk, self).__init__(credentials)
         self.pk = pk
         self.dynamo_db = boto3.resource('dynamodb', aws_access_key_id=credentials.access_key_id,
-                                        aws_secret_access_key=credentials.secret_key)
+                                        aws_secret_access_key=credentials.secret_key, aws_session_token=credentials.token)
         self.table = self.dynamo_db.Table('messages')
 
     def query(self) -> list:
