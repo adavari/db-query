@@ -18,4 +18,6 @@ class Query:
                 item['part'] = int(item['part'])
             if 'msisdn' in item:
                 del item['msisdn']
+            if 'internalDataCoding' in item:
+                item['internalDataCoding'] = int(item['internalDataCoding'])
         return response
