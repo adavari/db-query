@@ -15,6 +15,13 @@ from questions import query_question, query_parameter__pk_question, query_parame
     query_parameter__msisdn_question, next_step_question, output_question, queue_question
 from sqs_queue import send_to_output
 
+def filter(data: list) -> list:
+    out = []
+    for d in data:
+        if d['status']['S'] == 'UNKNOWN':
+            out.append(d)
+    return out
+
 config_reader = ConfigReader("{}/.aws/credentials".format(str(Path.home())))
 
 profile_question = [
@@ -56,6 +63,10 @@ if len(response) == 0:
     print("done")
     exit()
 
+response = filter(response)
+
+print("after filter {}".format(len(response)))
+
 next_step_answer = prompt(next_step_question, style=custom_style_2)
 if next_step_answer['next_step'] == 'create output':
     output_answer = prompt(output_question, style=custom_style_2)
@@ -68,3 +79,4 @@ elif next_step_answer['next_step'] == 'send to queue':
     exit()
 else:
     exit()
+
