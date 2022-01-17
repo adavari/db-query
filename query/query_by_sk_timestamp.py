@@ -45,5 +45,5 @@ class QueryBySkTimestamp(Query):
             )
             data.extend(response['Items'])
 
-        return self.normalize(response['Items'])
+        return self.normalize(data)
 
