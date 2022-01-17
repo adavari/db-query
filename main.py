@@ -18,7 +18,7 @@ from sqs_queue import send_to_output
 def filter(data: list) -> list:
     out = []
     for d in data:
-        if d['status']['S'] == 'UNKNOWN':
+        if d['status'] == 'UNKNOWN':
             out.append(d)
     return out
 
